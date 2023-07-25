@@ -70,12 +70,13 @@ class AppButton extends StatelessWidget {
                   AppText.p2(_text),
                 ]),
       style: ElevatedButton.styleFrom(
-          elevation: elevation,
-          primary: _backgroundColor,
-          minimumSize: Size.fromHeight(_height),
-          shape: RoundedRectangleBorder(
-            borderRadius: _borderRadius,
-          )),
+        elevation: elevation,
+        backgroundColor: _backgroundColor,
+        minimumSize: Size.fromHeight(_height),
+        shape: RoundedRectangleBorder(
+          borderRadius: _borderRadius,
+        ),
+      ),
     );
   }
 }
