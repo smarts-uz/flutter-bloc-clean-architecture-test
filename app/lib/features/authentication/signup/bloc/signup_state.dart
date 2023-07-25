@@ -23,10 +23,10 @@ class SignUpState extends Equatable {
   List<Object> get props => [email, password, confirmedPassword, status];
 
   SignUpState copyWith({
+    required FormzStatus status,
     Email? email,
     Password? password,
     ConfirmedPassword? confirmedPassword,
-    required FormzStatus status,
     String? errorMessage,
   }) {
     return SignUpState(

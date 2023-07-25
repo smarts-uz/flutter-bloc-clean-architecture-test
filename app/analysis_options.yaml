@@ -1,4 +1,4 @@
-include: package:very_good_analysis/analysis_options.2.4.0.yaml
+include: package:very_good_analysis/analysis_options.5.0.0.yaml
 
 linter:
   rules:
@@ -6,3 +6,5 @@ linter:
     comment_references: false
     sort_pub_dependencies: false
     lines_longer_than_80_chars: false
+    depend_on_referenced_packages: false
+    no_leading_underscores_for_local_identifiers: false

@@ -17,9 +17,9 @@ class LoginState extends Equatable {
   List<Object> get props => [email, password, status];
 
   LoginState copyWith({
+    required FormzStatus status,
     Email? email,
     Password? password,
-    required FormzStatus status,
     String? errorMessage,
   }) {
     return LoginState(

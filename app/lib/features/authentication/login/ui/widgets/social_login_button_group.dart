@@ -33,7 +33,7 @@ class SocialLoginButtonGroup extends StatelessWidget {
               'assets/facebook_logo.svg',
               height: theme.sizes.xl,
             ),
-            // TODO(vincent): handle login with Facebook instead of Google
+            // (vincent): handle login with Facebook instead of Google
             onPressed: () => context.read<LoginCubit>().logInWithGoogle(),
           ),
         ],

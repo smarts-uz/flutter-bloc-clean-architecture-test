@@ -33,10 +33,10 @@ extension PumpApp on WidgetTester {
 
 @isTest
 Future<void> testUI({
+  required WidgetTesterCallback callback,
   String given = '',
   String when = '',
   String then = '',
-  required WidgetTesterCallback callback,
 }) async {
   return testWidgets(
     '\nGIVEN 👉: $given \n WHEN ⚡️: $when \n THEN 🙌: $then \n',
