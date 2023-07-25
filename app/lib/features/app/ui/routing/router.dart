@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_bloc_clean_architecture/features/app/bloc/app_bloc.dart';
@@ -5,6 +7,23 @@ import 'package:flutter_bloc_clean_architecture/features/authentication/login/ui
 import 'package:flutter_bloc_clean_architecture/features/authentication/signup/ui/signup_page.dart';
 import 'package:flutter_bloc_clean_architecture/features/home/ui/home_page.dart';
 import 'package:go_router/go_router.dart';
+
+class GoRouterRefreshStream extends ChangeNotifier {
+  GoRouterRefreshStream(Stream<dynamic> stream) {
+    notifyListeners();
+    _subscription = stream.asBroadcastStream().listen(
+          (dynamic _) => notifyListeners(),
+        );
+  }
+
+  late final StreamSubscription<dynamic> _subscription;
+
+  @override
+  void dispose() {
+    _subscription.cancel();
+    super.dispose();
+  }
+}
 
 GoRouter router(BuildContext context, String? initialLocation) => GoRouter(
       initialLocation: initialLocation ?? Routes.login,
@@ -30,10 +49,10 @@ GoRouter router(BuildContext context, String? initialLocation) => GoRouter(
           },
         ),
       ],
-      redirect: (state) {
+      redirect: (BuildContext context, GoRouterState state) {
         final loggedIn = context.read<AppBloc>().state.isAuthenticated;
-        final loggingIn = state.subloc == Routes.login;
-        final signingUp = state.subloc == Routes.signup;
+        final loggingIn = state.matchedLocation == Routes.login;
+        final signingUp = state.matchedLocation == Routes.signup;
 
         if (signingUp) {
           return null;
