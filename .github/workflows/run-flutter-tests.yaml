@@ -1,0 +1,38 @@
+name: Run tests
+on:
+  push:
+    branches: [master]
+    pull_request:
+      branches: [master]
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the code
+        uses: actions/checkout@v2
+
+      - name: Install and set Flutter version
+        uses: subosito/flutter-action@v2
+        with:
+          channel: "stable"
+
+      - name: Restore packages
+        working-directory: ./app
+        run: flutter pub get
+
+      - name: Analyze
+        working-directory: ./app
+        run: flutter analyze
+
+      - name: Run tests
+        working-directory: ./app
+        run: flutter test --no-pub --coverage --test-randomize-ordering-seed random
+
+      - name: Upload coverage to codecov
+        uses: codecov/codecov-action@v2
+        with:
+          directory: ./app/coverage/
+          files: lcov.info
+          fail_ci_if_error: true
+          verbose: true

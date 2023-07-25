@@ -1,0 +1,8 @@
+{
+  "App Theme": {
+    "scope": "dart",
+    "prefix": "trs",
+    "description": "Import Theme from context",
+    "body": "final theme = ThemeResolver.of(context);"
+  }
+}
